@@ -21,8 +21,14 @@ from rule import PrismX
 from rule import CyberEdge
 from rule import cyberedge_
 from rule import SerializedPayloadGenerator
+from rule import xray_dongjian
+from rule import xray_scan
+from rule import vulfocus
+from rule import Vulinbox
+from rule import golin
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
+
 
 def finger(IPport):
     ip, port = IPport.split(":") 
@@ -49,7 +55,12 @@ def finger(IPport):
         PrismX.check,
         CyberEdge.check,
         cyberedge_.check,
-        SerializedPayloadGenerator.check
+        SerializedPayloadGenerator.check,
+        xray_dongjian.check,
+        xray_scan.check,
+        vulfocus.check,
+        Vulinbox.check,
+        golin.check
     ]
 
     # 使用线程池加速执行
@@ -60,4 +71,3 @@ def finger(IPport):
         # 使用tqdm显示进度条，注意tqdm和线程池并发执行时的同步
         for future in tqdm(as_completed(futures), total=len(futures), desc=f"主动探测指纹： {ip}:{port}", unit="check"):
             future.result()  # 获取结果（如果需要的话，可以处理返回值）
-

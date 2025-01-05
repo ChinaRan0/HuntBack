@@ -62,11 +62,22 @@ Everything-文件搜索服务
 
 ScopeSentry-综合信息收集工具
 
-CyberEdge-信息收集工具【不知名开发者】
+CyberEdge-信息收集工具【老版本】
 
 cyberedge-信息收集工具【GitHub开源】
 
 SerializedPayloadGenerator-反序列化生成器
+
+长亭洞鉴（X-Ray）安全评估系统
+
+xray-scan-Xray扫描输出结果html
+
+vulfocus-漏洞验证平台
+
+Vulinbox-Agent(Yakit靶场)
+
+Golin-基线核查工具
+
 
 ## 使用方法
 
@@ -82,7 +93,7 @@ pip install requests
 
 
 
-然后运行python-HuntBack.py即可
+然后运行python HuntBack.py即可
 
 
 
