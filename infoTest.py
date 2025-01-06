@@ -26,6 +26,7 @@ from rule import xray_scan
 from rule import vulfocus
 from rule import Vulinbox
 from rule import golin
+from rule import JavaChains
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
@@ -60,7 +61,8 @@ def finger(IPport):
         xray_scan.check,
         vulfocus.check,
         Vulinbox.check,
-        golin.check
+        golin.check,
+        JavaChains.check
     ]
 
     # 使用线程池加速执行
