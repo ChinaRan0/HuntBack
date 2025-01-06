@@ -90,6 +90,7 @@ JavaChains-Java反序列化攻击工具
 pip install whois
 pip install ipwhois
 pip install requests
+pip install prettytable
 ```
 
 
