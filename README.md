@@ -91,6 +91,7 @@ pip install whois
 pip install ipwhois
 pip install requests
 pip install prettytable
+pip install tqdm
 ```
 
 
