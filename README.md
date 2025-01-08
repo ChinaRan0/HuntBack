@@ -80,6 +80,40 @@ Golin-基线核查工具
 
 JavaChains-Java反序列化攻击工具
 
+C2检测：
+
+vshell
+
+Cobalt Strike
+
+Mythic
+
+Metasploit ssl listener
+
+Merlin
+
+CDeimos
+
+MacC2
+
+MacShellSwift
+
+Sliver
+
+EvilGinx2
+
+Shad0w
+
+Get2
+
+GRAT2 C2
+
+Covenant
+
+SILENTRINITY
+
+PoshC2
+
 ## 使用方法
 
 开发版本：python3.8
@@ -93,6 +127,7 @@ pip install requests
 pip install prettytable
 pip install tqdm
 pip install pyjarm
+
 ```
 
 
