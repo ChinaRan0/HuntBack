@@ -67,7 +67,7 @@ def finger(IPport):
         golin.check,
         JavaChains.check,
         cs.check,
-        vshel_tcp.check,
+        vshell_tcp.check,
         afrog.check
     ]
 
