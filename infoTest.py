@@ -29,6 +29,7 @@ from rule import golin
 from rule import JavaChains
 from rule import cs
 from rule import vshel_tcp
+from rule import afrog
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
@@ -66,7 +67,8 @@ def finger(IPport):
         golin.check,
         JavaChains.check,
         cs.check,
-        vshel_tcp.check
+        vshel_tcp.check,
+        afrog.check
     ]
 
     # 使用线程池加速执行
