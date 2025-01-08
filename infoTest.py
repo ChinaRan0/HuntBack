@@ -27,6 +27,8 @@ from rule import vulfocus
 from rule import Vulinbox
 from rule import golin
 from rule import JavaChains
+from rule import cs
+from rule import vshel_tcp
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
@@ -62,7 +64,9 @@ def finger(IPport):
         vulfocus.check,
         Vulinbox.check,
         golin.check,
-        JavaChains.check
+        JavaChains.check,
+        cs.check,
+        vshel_tcp.check
     ]
 
     # 使用线程池加速执行
