@@ -28,7 +28,7 @@ from rule import Vulinbox
 from rule import golin
 from rule import JavaChains
 from rule import cs
-from rule import vshel_tcp
+from rule import vshell_tcp
 from rule import afrog
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
