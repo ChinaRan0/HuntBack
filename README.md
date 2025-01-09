@@ -82,7 +82,7 @@ JavaChains-Java反序列化攻击工具
 
 afrog-漏洞扫描
 
-C2检测：
+C2检测(C2检测原理是通过jarm指纹进行检测，目前可以用的pyjarm模块有一定的bug，会报错，不必理会)：
 
 vshell
 
