@@ -14,6 +14,21 @@ def is_port_open(ip, port):
     except (socket.timeout, socket.error):
         return False
 
+def parse_ports(port_input):
+    """
+    解析用户指定的端口列表，支持单个端口、多个端口、以及端口范围。
+    """
+    ports = []
+    for part in port_input.split(','):
+        if '-' in part:
+            # 处理端口范围
+            start, end = map(int, part.split('-'))
+            ports.extend(range(start, end + 1))
+        else:
+            # 处理单个端口
+            ports.append(int(part))
+    return ports
+
 def scan_ports(target_ip, port_list, num_threads=10):
     open_ports = []
     
@@ -34,10 +49,12 @@ def scan_ports(target_ip, port_list, num_threads=10):
     
     return open_ports
 
-def main_info(ipInput, porttype):
+def main_info(ipInput, porttype, custom_ports=None):
     target_ip = ipInput
-    if porttype == "common":
-        port_list = [80,81, 443, 8080, 22, 3389,4567,8010, 5003, 47808 ,8888, 3443,1818, 5000, 6000,9443, 7000, 8081, 5005, 3200, 8001, 8834, 8082, 8083, 8084, 8085, 11000, 8800]  # 常用端口列表
+    if custom_ports:
+        port_list = custom_ports  # 用户指定的端口列表
+    elif porttype == "common":
+        port_list = [80, 81, 443, 8080, 22, 3389, 4567, 8010, 5003, 47808 ,8888, 3443, 1818, 5000, 6000, 9443, 7000, 8081, 5005, 3200, 8001, 8834, 8082, 8083, 8084, 8085, 11000, 8800]  # 常用端口列表
     elif porttype == "all":
         port_list = range(1, 65536)  # 全端口扫描
     
@@ -83,8 +100,15 @@ def main():
 
     # 可选参数，启用全端口扫描
     parser.add_argument('--fullscan', action='store_true', help="【可选参数】启用全端口扫描")
+    
+    # 新增参数，支持用户指定端口
+    parser.add_argument('--ports', type=str, help="指定要扫描的端口（例如：80,90,8899,1000-2000）")
 
     args = parser.parse_args()
+
+    custom_ports = None
+    if args.ports:
+        custom_ports = parse_ports(args.ports)
 
     if args.file:
         # 文件导入方式
@@ -94,7 +118,7 @@ def main():
             process_ip(ip)
             # 根据是否启用全端口扫描，选择扫描方式
             porttype = "all" if args.fullscan else "common"
-            main_info(ip, porttype)
+            main_info(ip, porttype, custom_ports)
 
     elif args.cmds:
         # 循环模式
@@ -105,14 +129,14 @@ def main():
                 break
             # 根据是否启用全端口扫描，选择扫描方式
             porttype = "all" if args.fullscan else "common"
-            main_info(ip, porttype)
+            main_info(ip, porttype, custom_ports)
 
     elif args.ip:
         # 单IP模式
         print(f"处理单个 IP 地址: {args.ip}")
         # 根据是否启用全端口扫描，选择扫描方式
         porttype = "all" if args.fullscan else "common"
-        main_info(args.ip, porttype)
+        main_info(args.ip, porttype, custom_ports)
 
     elif args.ipwhois:
         ipwhois_Search.ipwhois(args.ipwhois)
