@@ -102,7 +102,7 @@ def main():
     parser.add_argument('--fullscan', action='store_true', help="【可选参数】启用全端口扫描")
     
     # 新增参数，支持用户指定端口
-    parser.add_argument('--ports', type=str, help="指定要扫描的端口（例如：80,90,8899,1000-2000）")
+    parser.add_argument('--ports', type=str, help="【可选参数】指定端口扫描（例如：80,90,8899,1000-2000）")
 
     args = parser.parse_args()
 
