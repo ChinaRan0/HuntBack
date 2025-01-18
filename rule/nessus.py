@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "Nessus" in res.text:
             print(f"https://{ip}:{port}/#/user/login----Nessus(漏洞扫描器)")
+            return "Nessus(漏洞扫描器)"
     except:
         pass

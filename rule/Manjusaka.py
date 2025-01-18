@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "Manjusaka" in res.text:
             print(f"http://{ip}:{port}/#/user/login----Manjusaka(牛屎花C2管理)")
+            return "Manjusaka(牛屎花C2管理)"
     except:
         pass

@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "Scope Sentry" in res.text:
             print(f"http://{ip}:{port}/#/login?redirect=/dashboard----ScopeSentry(信息收集资产管理系统)")
+            return "ScopeSentry(信息收集资产管理系统)"
     except:
         pass

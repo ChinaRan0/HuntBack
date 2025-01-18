@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "XSS Platform" in res.text:
             print(f"http://{ip}:{port}/xss.php?do=login----XSS Platform(XSS平台)")
+            return "XSS Platform(XSS平台)"
     except:
         pass

@@ -24,5 +24,6 @@ def check(ip,port):
     # print(res.text)
         if "X-Ray" in res.text:
             print(f"https://{ip}:{port}----长亭洞鉴（X-Ray）安全评估系统")
+            return "长亭洞鉴（X-Ray）安全评估系统"
     except:
         pass

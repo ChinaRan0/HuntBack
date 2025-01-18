@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "临兵" in res.text:
             print(f"http://{ip}:{port}/#/login?redirect=%2Fdashboard----临兵(漏扫)")
+            return "临兵(漏扫)"
     except:
         pass

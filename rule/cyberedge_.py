@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "<title>cyberedge</title>" in res.text and "We're sorry but cyberedge doesn't work properly without JavaScript "in res.text:
             print(f"http://{ip}:{port}/target/list----cyberedge(信息收集平台)")
+            return "cyberedge(信息收集平台)"
     except:
         pass

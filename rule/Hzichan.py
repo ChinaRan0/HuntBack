@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "Flask Datta Able" in res.text:
             print(f"http://{ip}:{port}/login----H(资产收集)")
+            return "H(资产收集)"
     except:
         pass

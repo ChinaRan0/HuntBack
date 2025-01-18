@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "ChatGPT Next Web" in res.text:
             print(f"http://{ip}:{port}/----ChatGPT Next Web")
+            return "ChatGPT Next Web"
     except:
         pass

@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "TestNet 资产管理平台" in res.text:
             print(f"https://{ip}:{port}/login?redirect=/dashboard/analysis----TestNet(资产管理平台)")
+            return "TestNet(资产管理平台)"
     except:
         pass

@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "Prism X" in res.text and "root" in res.text:
             print(f"https://{ip}:{port}/user/login?redirect=/----PrismX(PrismX/棱镜X·单兵渗透平台)")
+            return "PrismX(PrismX/棱镜X·单兵渗透平台)"
     except:
         pass

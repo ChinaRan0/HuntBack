@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "大宝剑-实战化攻防对抗系统" in res.text:
             print(f"http://{ip}:{port}/auth/login----大宝剑(边界资产梳理工具)")
+            return "大宝剑(边界资产梳理工具)"
     except:
         pass

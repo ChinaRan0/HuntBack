@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "enabledelayedexpansion" in res.text:
             print(f"http://{ip}:{port}/swt----C2(Vshell_tcp)")
+            return "C2(Vshell_tcp)"
     except:
         pass

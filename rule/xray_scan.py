@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "XRay Report" in res.text:
             print(f"http://{ip}:{port}/----Xray_scan(Xray扫描器)")
+            return "Xray_scan(Xray扫描器)"
     except:
         pass

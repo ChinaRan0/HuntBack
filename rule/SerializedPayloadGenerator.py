@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "Home Page - Serialized Payload Generator" in res.text:
             print(f"http://{ip}:{port}/----SerializedPayloadGenerator(反序列化生成器)")
+            return "SerializedPayloadGenerator(反序列化生成器)"
     except:
         pass

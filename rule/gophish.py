@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "Gophish" in res.text:
             print(f"https://{ip}:{port}/login?next=%2F----gophish(钓鱼工具)")
+            return "gophish(钓鱼工具)"
     except:
         pass

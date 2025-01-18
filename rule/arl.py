@@ -5,5 +5,6 @@ def check(ip,port):
         res.encoding="utf-8"
         if "资产灯塔系统" in res.text:
             print(f"https://{ip}:{port}/login----灯塔ARL")
+            return "灯塔ARL"
     except:
         pass

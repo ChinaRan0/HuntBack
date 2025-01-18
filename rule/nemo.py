@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "Nemo" in res.text:
             print(f"https://{ip}:{port}/----nemo(自动化信息收集)")
+            return "nemo(自动化信息收集)"
     except:
         pass

@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "VIPER" in res.text:
             print(f"https://{ip}:{port}/#/user/login----Viper(C2)")
+            return "Viper(C2)"
     except:
         pass

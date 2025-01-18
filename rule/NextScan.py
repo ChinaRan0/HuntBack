@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "NextScan" in res.text:
             print(f"http://{ip}:{port}/----NextScan(黑盒扫描)")
+            return "NextScan(黑盒扫描)"
     except:
         pass

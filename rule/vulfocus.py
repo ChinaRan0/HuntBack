@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "vulfocus" in res.text:
             print(f"http://{ip}:{port}/#/login?redirect=%2Fdashboard----vulfocus(vulfocus漏洞平台)")
+            return "vulfocus漏洞平台"
     except:
         pass

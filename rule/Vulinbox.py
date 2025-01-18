@@ -7,5 +7,6 @@ def check(ip,port):
         if "Vulinbox - Agent" in res.text:
 
             print(f"https://{ip}:{port}/----Vulinbox(Yakit靶场)")
+            return "Vulinbox(Yakit靶场)"
     except:
         pass

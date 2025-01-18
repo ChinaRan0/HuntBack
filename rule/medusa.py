@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "Medusa doesn't work properly without JavaScript" in res.text:
             print(f"https://{ip}:{port}/----美杜莎红队武器库平台")
+            return "美杜莎红队武器库平台"
     except:
         pass

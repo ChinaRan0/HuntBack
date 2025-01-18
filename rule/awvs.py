@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "<title>Acunetix</title>" in res.text or "Invicti" in res.text:
             print(f"https://{ip}:{port}/----AWVS漏洞扫描器")
+            return "AWVS漏洞扫描器"
     except:
         pass

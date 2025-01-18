@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "Login reNgine" in res.text:
             print(f"http://{ip}:{port}/----reNgine(Web渗透工具)")
+            return "reNgine(Web渗透工具)"
     except:
         pass

@@ -7,5 +7,6 @@ def check(ip,port):
         if "afrog" in res.text:
 
             print(f"http://{ip}:{port}/----afrog")
+            return "afrog"
     except:
         pass

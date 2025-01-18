@@ -6,5 +6,6 @@ def check(ip,port):
         # print(res.text)
         if "LangSrc" in res.text:
             print(f"https://{ip}:{port}/#/user/login----LangSrc(资产监控平台)")
+            return "LangSrc(资产监控平台)"
     except:
         pass

@@ -5,6 +5,7 @@ def check(ip,port):
         res.encoding="utf-8"
         # print(res.text)
         if "<title>CyberEdge</title>" in res.text:
-            print(f"http://{ip}:{port}/target/list----CyberEdge(未知开发者-信息收集平台)")
+            print(f"http://{ip}:{port}/target/list----CyberEdge(信息收集平台)")
+            return "CyberEdge(信息收集平台)"
     except:
         pass
