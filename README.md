@@ -129,13 +129,7 @@ PoshC2
 在运行前，你需要安装相关依赖库
 
 ```pip
-pip install whois
-pip install ipwhois
-pip install requests
-pip install prettytable
-pip install tqdm
-pip install pyjarm
-
+pip install -r requirements.txt
 ```
 
 
