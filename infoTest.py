@@ -1,41 +1,11 @@
 import warnings
 warnings.filterwarnings("ignore")
+import os
+import time
+from datetime import datetime
 from tqdm import tqdm
-from rule import arl
-from rule import viper
-from rule import awvs
-from rule import medusa
-from rule import nessus
-from rule import LangSrc
-from rule import nemo
-from rule import NextScan
-from rule import Manjusaka
-from rule import Hzichan
-from rule import nps
-from rule import nps2
-from rule import ChatGPTnextWeb
-from rule import DBJ
-from rule import linbing
-from rule import ScopeSentry
-from rule import PrismX
-from rule import CyberEdge
-from rule import cyberedge_
-from rule import SerializedPayloadGenerator
-from rule import xray_dongjian
-from rule import xray_scan
-from rule import vulfocus
-from rule import Vulinbox
-from rule import golin
-from rule import JavaChains
-from rule import cs
-from rule import vshell_tcp
-from rule import afrog
-from rule import XSS_Platform
-from rule import reNgine
-from rule import gophish
-from rule import TestNet
+from rule import arl, viper, awvs, medusa, nessus, LangSrc, nemo, NextScan, Manjusaka, Hzichan, nps, nps2, ChatGPTnextWeb, DBJ, linbing, ScopeSentry, PrismX, CyberEdge, cyberedge_, SerializedPayloadGenerator, xray_dongjian, xray_scan, vulfocus, Vulinbox, golin, JavaChains, cs, vshell_tcp, afrog, XSS_Platform, reNgine, gophish, TestNet,http_test_rule
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from tqdm import tqdm
 import rule.http_test as http_test
 
 postType = ''
@@ -46,6 +16,8 @@ def finger(IPport):
 
     # 首先使用http_test检查是否为HTTP/HTTPS服务
     is_http_https = http_test.check(ip, port)
+
+    results = []
 
     if is_http_https:
         # 如果是HTTP/HTTPS服务，继续进行HTTP/HTTPS检测
@@ -82,6 +54,8 @@ def finger(IPport):
             reNgine.check,
             gophish.check,
             TestNet.check,
+
+            http_test_rule.check,
         ]
 
         # 使用线程池加速执行
@@ -91,7 +65,15 @@ def finger(IPport):
             
             # 使用tqdm显示进度条，注意tqdm和线程池并发执行时的同步
             for future in tqdm(as_completed(futures), total=len(futures), desc=f"主动探测指纹： {ip}:{port}", unit="check"):
-                future.result()  # 获取结果（如果需要的话，可以处理返回值）
+                result = future.result()  # 获取结果
+                if result:
+                    results.append({"ip": ip, "port": port, "type": "Web", "name": result})
+
     else:
         # 如果不是HTTP/HTTPS服务，使用JARM_test进行进一步检测
-        cs.check(ip, port)
+        result = cs.check(ip, port)
+        if result:
+            results.append({"ip": ip, "port": port, "type": "Other", "name": result})
+
+    return results
+  
