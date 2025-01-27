@@ -4,7 +4,7 @@ import os
 import time
 from datetime import datetime
 from tqdm import tqdm
-from rule import arl, viper, awvs, medusa, nessus, LangSrc, nemo, NextScan, Manjusaka, Hzichan, nps, nps2, ChatGPTnextWeb, DBJ, linbing, ScopeSentry, PrismX, CyberEdge, cyberedge_, SerializedPayloadGenerator, xray_dongjian, xray_scan, vulfocus, Vulinbox, golin, JavaChains, cs, vshell_tcp, afrog, XSS_Platform, reNgine, gophish, TestNet,http_test_rule
+from rule import arl, viper, awvs, medusa, nessus, LangSrc, nemo, NextScan, Manjusaka, Hzichan, nps, nps2, ChatGPTnextWeb, DBJ, linbing, ScopeSentry, PrismX, CyberEdge, cyberedge_, SerializedPayloadGenerator, xray_dongjian, xray_scan, vulfocus, Vulinbox, golin, JavaChains, cs, vshell_tcp, afrog, XSS_Platform, reNgine, gophish, TestNet,http_test_rule,Directory,openVAS,revsuit,MemShellParty
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import rule.http_test as http_test
 
@@ -54,8 +54,11 @@ def finger(IPport):
             reNgine.check,
             gophish.check,
             TestNet.check,
-
+            Directory.check,
             http_test_rule.check,
+            openVAS.check,
+            revsuit.check,
+            MemShellParty.check
         ]
 
         # 使用线程池加速执行

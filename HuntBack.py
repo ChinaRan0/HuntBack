@@ -8,6 +8,8 @@ from tqdm import tqdm
 from module import domainwhois
 import os
 import time
+from html import escape
+
 
 def is_port_open(ip, port):
     try:
@@ -150,100 +152,200 @@ def main():
         filename = f"output/{timestamp}.html"
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         with open(filename, "w", encoding="utf-8") as f:
-            f.write("""
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Results</title>
-                <style>
-                    body {
-                        font-family: 'Arial', sans-serif;
-                        background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-                        color: #fff;
-                        padding: 20px;
-                        margin: 0;
-                    }
-                    table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        border-radius: 10px;
-                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-                        overflow: hidden;
-                    }
-                    th, td {
-                        padding: 12px 20px;
-                        text-align: left;
-                        font-size: 16px;
-                        border-bottom: 2px solid #444;
-                    }
-                    th {
-                        background-color: #1e1e2f;
-                        color: #ff7f50;
-                        text-transform: uppercase;
-                        letter-spacing: 1px;
-                    }
-                    tr:nth-child(even) {
-                        background-color: #33334d;
-                    }
-                    tr:nth-child(odd) {
-                        background-color: #2a2a3c;
-                    }
-                    tr:hover {
-                        background-color: #444464;
-                        transition: 0.3s;
-                    }
-                    td {
-                        color: #b0c4de;
-                    }
-                    h1 {
-                        font-size: 36px;
-                        text-align: center;
-                        color: #ff7f50;
-                        margin-bottom: 40px;
-                        text-transform: uppercase;
-                    }
-                    .container {
-                        max-width: 1200px;
-                        margin: 0 auto;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="container">
-                    <h1>HuntBack</h1>
-                    <table>
-                        <tr>
-                            <th>IP</th>
-                            <th>Port</th>
-                            <th>Type</th>
-                            <th>Name</th>
-                        </tr>
-            """)
+            f.write(f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto+Mono:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {{
+            --neon-blue: #00f3ff;
+            --cyber-purple: #ff00ff;
+            --text-primary: #e0f7ff;
+            --table-bg: rgba(0, 20, 40, 0.95);
+            --table-border: rgba(0, 243, 255, 0.2);
+        }}
 
+        /* 重置默认样式 */
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+
+        body {{
+            font-family: 'Orbitron', sans-serif;
+            background: #000;
+            color: var(--text-primary);
+            min-height: 100vh;
+            position: relative;
+        }}
+
+        /* 修复网格背景 */
+        .grid-layer {{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 0;
+            pointer-events: none;
+        }}
+
+        /* 修复容器布局 */
+        .container {{
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }}
+
+        .cyber-title {{
+            font-size: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+            background: linear-gradient(45deg, var(--neon-blue), var(--cyber-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+        }}
+
+        /* 修复表格布局 */
+        .cyber-table-wrapper {{
+            width: 100%;
+            margin: 2rem 0;
+            overflow-x: auto;
+            background: var(--table-bg);
+            border: 1px solid var(--table-border);
+            border-radius: 8px;
+        }}
+
+        .cyber-table {{
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }}
+
+        .cyber-table th,
+        .cyber-table td {{
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--table-border);
+        }}
+
+        .cyber-table th {{
+            background: rgba(0, 50, 100, 0.9);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }}
+
+        .cyber-table tr:hover td {{
+            background: rgba(0, 243, 255, 0.05);
+        }}
+
+        /* 粒子系统修复 */
+        .particle {{
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: var(--neon-blue);
+            pointer-events: none;
+            opacity: 0.5;
+        }}
+
+        /* 响应式修复 */
+        @media (max-width: 768px) {{
+            .container {{
+                padding: 10px;
+            }}
+            .cyber-title {{
+                font-size: 2rem;
+            }}
+            .cyber-table th,
+            .cyber-table td {{
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="grid-layer"></div>
+    <div class="particle-field" id="particles"></div>
+
+    <div class="container">
+        <h1 class="cyber-title">HuntBack Scan</h1>
+        
+        <div class="cyber-table-wrapper">
+            <table class="cyber-table">
+                <thead>
+                    <tr>
+                        <th>IP Address</th>
+                        <th>Port</th>
+                        <th>Service</th>
+                        <th>Identifier</th>
+                    </tr>
+                </thead>
+                <tbody>""")
+
+            # 生成表格数据
             for result in all_results:
                 f.write(f"""
                         <tr>
-                            <td>{result['ip']}</td>
-                            <td>{result['port']}</td>
-                            <td>{result['type']}</td>
-                            <td>{result['name']}</td>
-                        </tr>
-                """)
+                            <td>{(str(result['ip']))}</td>
+                            <td>{(str(result['port']))}</td>
+                            <td>{(str(result['type']))}</td>
+                            <td>{(str(result['name']))}</td>
+                        </tr>""")
 
             f.write("""
-            </table>
-             <div class="footer" style="text-align:center;">
-    <p>公众号：知攻善防实验室</p>
-    <p><a href="https://github.com/ChinaRan0/HuntBack" target="_blank">HuntBack</a></p>
-</div>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <script>
+            // 稳定的粒子系统
+            function initParticles() {{
+                const container = document.getElementById('particles');
+                const createParticle = () => {{
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.cssText = `
+                        left: ${Math.random() * 100}%;
+                        top: ${Math.random() * 100}%;
+                        animation: move ${5 + Math.random() * 10}s linear infinite;
+                    `;
+                    container.appendChild(particle);
+                }};
+                
+                for(let i = 0; i < 50; i++) {{
+                    createParticle();
+                }}
+            }}
+
+            // 添加基础动画
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes move {{
+                    from {{ transform: translate(0, 0); opacity: 0.5; }}
+                    to {{ transform: translate(${Math.random() * 400 - 200}px, ${Math.random() * 400 - 200}px); opacity: 0; }}
+                }}
+            `;
+            document.head.appendChild(style);
+
+            // 初始化
+            document.addEventListener('DOMContentLoaded', initParticles);
+        </script>
     </body>
-    </html>
-    """)
-
-
-        print(f"输出结果保存至：{filename}")
+    </html>""")
 
 
 if __name__ == "__main__":
