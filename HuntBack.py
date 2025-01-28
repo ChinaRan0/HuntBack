@@ -347,6 +347,7 @@ def main():
     </body>
     </html>""")
 
+        print(f"[+] HTML report generated successfully! {filename}")
 
 if __name__ == "__main__":
     main()
